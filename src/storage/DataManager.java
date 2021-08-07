@@ -29,17 +29,17 @@ public class DataManager<E> {
     }
 
     public List<E> readFile(String fileName){
-        List<E> computers = new ArrayList<>();
+        List<E> eList = new ArrayList<>();
         File file = new File(fileName);
         if(file.length()>0){
             try {
                 FileInputStream fis = new FileInputStream(file);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                computers = (List<E>) ois.readObject();
+                eList = (List<E>) ois.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        return computers;
+        return eList;
     }
 }

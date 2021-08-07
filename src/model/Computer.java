@@ -53,15 +53,6 @@ public class Computer implements Serializable {
         this.serviceList = serviceList;
     }
 
-    @Override
-    public String toString() {
-        return "Computer{" +
-                "idName='" + idName + '\'' +
-                ", status='" + status + '\'' +
-                ", timePlay=" + timePlay +
-                ", serviceList=" + serviceList +
-                '}';
-    }
     public double payService() {
         double sum = 0;
         for (Service service:serviceList) {
@@ -71,6 +62,17 @@ public class Computer implements Serializable {
     }
 
     public double calculatorMoney() {
-        return payService() + timePlay * UNIT_PRICE;
+        double serviceMoney = payService();
+        return serviceMoney + timePlay * UNIT_PRICE;
+    }
+
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "idName='" + idName + '\'' +
+                ", status='" + status + '\'' +
+                ", timePlay=" + timePlay +
+                ", serviceList=" + serviceList +
+                '}';
     }
 }

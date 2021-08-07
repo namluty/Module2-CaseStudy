@@ -3,23 +3,18 @@ package view;
 import controller.ComputerManager;
 import model.Computer;
 import model.Service;
-import storage.DataManager;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ComputerManagerView {
-    static DataManager<Computer> dataManager = new DataManager();
-    static List<Computer> computerList = dataManager.readFile("computerList.txt");
-    public static ComputerManager computerManager = new ComputerManager(computerList, "admin");
 
-    public static void addComputer() {
+    public static void addComputer(ComputerManager computerManager) {
         Computer newComputer = ComputerView.createNewComputer();
         computerManager.addComputer(newComputer);
     }
-    public static void editComputer() {
+    public static void editComputer(ComputerManager computerManager) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter iD name of Computer you need edit: ");
+        System.out.println("Enter idName of Computer your want to Edit: ");
         String idName = scanner.nextLine();
         int index = computerManager.searchById(idName);
         if (index == -1) {
@@ -30,20 +25,58 @@ public class ComputerManagerView {
             System.out.println("Finish");
         }
     }
-    public static void searchComputer() {
+//    public void editComputer(ComputerManager computerManager) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter your input a name want to Edit: ");
+//        String search = scanner.nextLine();
+//        Computer name = computerManager.findByName(search);
+//        if (name == null)
+//            System.out.println("Not Found!");
+//        else {
+//            Scanner scanner1 = new Scanner(System.in);
+//            System.out.println("Enter replace the old name: " + name.getIdName());
+//            String newName = scanner1.nextLine();
+//            name.setIdName(newName);
+//        }
+//    }
+//    public void deleteComputer(ComputerManager computerManager) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter your input a name want to Delete: ");
+//        String name = scanner.nextLine();
+//        Computer names = computerManager.findByName(name);
+//        if (names == null)
+//            System.out.println("Name does not exist");
+//        else {
+//            computerManager.deleteComputer(names);
+//        }
+//    }
+    public static void deleteComputer(ComputerManager computerManager) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter ID you are want to Search: ");
-        String id = scanner.nextLine();
-        int index = computerManager.searchById(id);
+        System.out.println("Enter idName of Computer your want to Delete: ");
+        String idName = scanner.nextLine();
+        int index = computerManager.searchById(idName);
         if (index == -1) {
             System.out.println("Not Found Computer");
         } else {
-            System.out.println(computerManager.getComputerList().get(index));
+            Computer newComputer = ComputerView.createNewComputer();
+            computerManager.deleteComputer(index);
+            System.out.println("Finish");
         }
     }
-    public static void addTimePlay() {
+//    public static void searchComputer(ComputerManager computerManager) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter ID you are want to Search: ");
+//        String id = scanner.nextLine();
+//        int index = computerManager.searchByName(id);
+//        if (index == -1) {
+//            System.out.println("Not Found Computer");
+//        } else {
+//            System.out.println(computerManager.getComputerList().get(index));
+//        }
+//    }
+    public static void addTimePlay(ComputerManager computerManager) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter ID name of Computer you need add time play: ");
+        System.out.println("Enter idName of Computer your want to add time play: ");
         String id = scanner.nextLine();
         int index = computerManager.searchById(id);
         if (index == -1) {
@@ -55,14 +88,14 @@ public class ComputerManagerView {
             System.out.println("Add finish");
         }
     }
-    public static void checkStatus() {
+    public static void checkStatus(ComputerManager computerManager) {
         System.out.println(computerManager.checkStatus());
     }
     //check tng computer
-    public static void checkStatusByIndex() {
+    public static void checkStatusByIndex(ComputerManager computerManager) {
         System.out.println(computerManager.checkStatus());
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter iD name of Computer you need search: ");
+        System.out.println("Enter idName of Computer your want to Search: ");
         String idName = scanner.nextLine();
         int index = computerManager.searchById(idName);
         if (index == -1) {
@@ -71,9 +104,9 @@ public class ComputerManagerView {
             System.out.println(computerManager.checkStatusByIndex(index));
         }
     }
-    public static void payMoney() {
+    public static void payMoneys(ComputerManager computerManager) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter iD name of Computer you need pay: ");
+        System.out.println("Enter idName of Computer your want to Pay: ");
         String idName = scanner.nextLine();
         int index = computerManager.searchById(idName);
         if (index == -1) {
@@ -82,9 +115,9 @@ public class ComputerManagerView {
             System.out.println(computerManager.payMoney(index));
         }
     }
-    public static void addService() {
+    public static void addService(ComputerManager computerManager) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter iD name of Computer you need add Service: ");
+        System.out.println("Enter idName of Computer your want to add Service: ");
         String idName = scanner.nextLine();
         int index = computerManager.searchById(idName);
         if (index == -1) {
@@ -94,7 +127,7 @@ public class ComputerManagerView {
             computerManager.addService(index,services);
         }
     }
-    public static void showAll() {
+    public static void showAll(ComputerManager computerManager) {
         computerManager.showAll();
     }
 }

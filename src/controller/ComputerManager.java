@@ -4,13 +4,12 @@ import model.Computer;
 import model.Service;
 import storage.DataManager;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ComputerManager {
-    private List<Computer> computerList = new ArrayList<>();
+    private List<Computer> computerList;
     private String name;
     private DataManager<Computer> dataManager = new DataManager<>();
 
@@ -55,10 +54,20 @@ public class ComputerManager {
         dataManager.writeFile(computerList, "computerList.txt");
     }
 
+    //    public Computer findByName(String name) {
+//        Computer computer = null;
+//        for (Computer com : computerList
+//        ) {
+//            if (com.getIdName().equals(name))
+//                computer = com;
+//        }
+//        return computer;
+//    }
     public int searchById(String id) {
         for (int i = 0; i < computerList.size(); i++) {
-            if (computerList.get(i).getIdName().equals(id)) ;
-            return i;
+            if (computerList.get(i).getIdName().equals(id)) {
+                return i;
+            }
         }
         return -1;
     }
@@ -88,17 +97,22 @@ public class ComputerManager {
         return computerList.get(index).getIdName() + "is: " + computerList.get(index).getStatus();
     }
 
-    public double payMoney(int index) {
+    public String payMoney(int index) {
         if (computerList.get(index).getStatus().equals(Computer.ONLINE)) {
-            computerList.get(index).setServiceList(null);
+            double totalMoney = computerList.get(index).calculatorMoney();
+            String result = computerList.get(index).toString()+" total money: "+totalMoney;
+            List<Service> serviceList= new ArrayList<>();
+            computerList.get(index).setServiceList(serviceList);
             computerList.get(index).setStatus(Computer.OFFLINE);
             computerList.get(index).setTimePlay(0);
             dataManager.writeFile(computerList, "computerList.txt");
+            return result;
         }
-        return computerList.get(index).calculatorMoney();
+        return "nothing to pay";
     }
+
     public void showAll() {
-        for (Computer computer:computerList) {
+        for (Computer computer : computerList) {
             System.out.println(computer + ": " + computer.calculatorMoney());
         }
     }
