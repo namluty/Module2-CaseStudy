@@ -55,7 +55,7 @@ public class Computer implements Serializable {
 
     public double payService() {
         double sum = 0;
-        for (Service service:serviceList) {
+        for (Service service : serviceList) {
             sum += service.getPrice();
         }
         return sum;

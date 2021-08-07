@@ -57,5 +57,8 @@ public class AccountView {
             name.setUsername(newUsername);
         }
     }
+    public static void menuAccount() {
+        Scanner scanner = new Scanner(System.in);
+    }
 }
 

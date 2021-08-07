@@ -38,14 +38,27 @@ public class ComputerManager {
         this.name = name;
     }
 
-    public void addComputer(Computer computer) {
-        computerList.add(computer);
-        dataManager.writeFile(computerList, "computerList.txt");
+    public boolean checkInstance(String newNameComputer) {
+        for (Computer computer : computerList) {
+            if (computer.getIdName().equals(newNameComputer)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean addComputer(Computer computer) {
+        if (checkInstance(computer.getIdName())) {
+            return false;
+        }else{
+            computerList.add(computer);
+            dataManager.writeFile(computerList, "computerList.txt");
+            return true;
+        }
     }
 
     public void editComputer(int index, Computer computer) {
         computerList.remove(index);
-        computerList.add(computer);
+//        computerList.add(computer);
         dataManager.writeFile(computerList, "computerList.txt");
     }
 
@@ -54,15 +67,6 @@ public class ComputerManager {
         dataManager.writeFile(computerList, "computerList.txt");
     }
 
-    //    public Computer findByName(String name) {
-//        Computer computer = null;
-//        for (Computer com : computerList
-//        ) {
-//            if (com.getIdName().equals(name))
-//                computer = com;
-//        }
-//        return computer;
-//    }
     public int searchById(String id) {
         for (int i = 0; i < computerList.size(); i++) {
             if (computerList.get(i).getIdName().equals(id)) {
@@ -88,32 +92,40 @@ public class ComputerManager {
     public String checkStatus() {
         String result = "";
         for (Computer computer : computerList) {
-            result += computer.getIdName() + "is: " + computer.getStatus() + "; \t";
+            result += computer.getIdName() + " " + "is: " + computer.getStatus() + "; \t";
         }
         return result;
     }
 
     public String checkStatusByIndex(int index) {
-        return computerList.get(index).getIdName() + "is: " + computerList.get(index).getStatus();
+        return computerList.get(index).getIdName() + " " + "is: " + computerList.get(index).getStatus();
     }
 
     public String payMoney(int index) {
         if (computerList.get(index).getStatus().equals(Computer.ONLINE)) {
             double totalMoney = computerList.get(index).calculatorMoney();
-            String result = computerList.get(index).toString()+" total money: "+totalMoney;
-            List<Service> serviceList= new ArrayList<>();
+            String result = computerList.get(index).toString() + " total money: " + totalMoney;
+            List<Service> serviceList = new ArrayList<>();
             computerList.get(index).setServiceList(serviceList);
             computerList.get(index).setStatus(Computer.OFFLINE);
             computerList.get(index).setTimePlay(0);
             dataManager.writeFile(computerList, "computerList.txt");
             return result;
         }
-        return "nothing to pay";
+        return "Nothing computer to Pay!!!";
     }
 
     public void showAll() {
         for (Computer computer : computerList) {
             System.out.println(computer + ": " + computer.calculatorMoney());
         }
+    }
+
+    public double showTotalMoney() {
+        double total = 0;
+        for (Computer computer : computerList) {
+            total += computer.calculatorMoney();
+        }
+        return total;
     }
 }

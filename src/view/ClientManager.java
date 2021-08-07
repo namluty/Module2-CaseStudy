@@ -15,7 +15,7 @@ public class ClientManager {
     static ComputerManagerView computerManagerView = new ComputerManagerView();
 
     public static void main(String[] args) {
-        login();
+//        login();
         System.out.println("Next Step!!!");
 
         Scanner input = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class ClientManager {
             System.out.println("3. Edit a computer in Room Gamming: ");
             System.out.println("4. Delete a computer in Room Gamming: ");
             System.out.println("5. Add Service Other: "); //Thêm dịch vụ
-            System.out.println("6. Edit hourly billing: "); //Chỉnh sửa tính tiền theo giờ
+            System.out.println("6. Edit hour billing: "); //Chỉnh sửa tính tiền theo giờ
             System.out.println("7. Bill please: "); //Tính tiền
             System.out.println("8. Manager Login Account: ");
             System.out.println("9. Show Turnover: "); //Hiển thị Doanh thu
@@ -39,8 +39,20 @@ public class ClientManager {
                     computerManagerView.addComputer(computerManager);
                     break;
                 case 2:
-
-                    computerManagerView.showAll(computerManager);
+                    Scanner scannerss = new Scanner(System.in);
+                    System.out.println("Enter a: to Show All Computer: ");
+                    System.out.println("Enter b: to Show Detail One Computer: ");
+                    String type = scannerss.nextLine();
+                    switch (type) {
+                        case "a": {
+                            computerManagerView.showAll(computerManager);
+                            break;
+                        }
+                        case "b": {
+                            computerManagerView.checkStatusByIndex(computerManager);
+                        }
+                            break;
+                    }
                     break;
                 case 3:
                     computerManagerView.editComputer(computerManager);
@@ -61,7 +73,7 @@ public class ClientManager {
 
                     break;
                 case 9:
-
+                    computerManagerView.showTotalMoney(computerManager);
                     break;
                 case 0:
                     System.out.println("Exit Menu!!!");
