@@ -1,21 +1,28 @@
 package view;
 
+import controller.AccountManager;
 import controller.ComputerManager;
+import model.Account;
 import model.Computer;
 import storage.DataManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class ClientManager {
     static AccountView accountView = new AccountView();
-    static DataManager<Computer> dataManager = new DataManager();
-    static List<Computer> computerList = dataManager.readFile("computerList.txt");
+    static DataManager<Account> dataManagerAcc = new DataManager();
+    static List<Account> accounts = dataManagerAcc.readFile("accountList.txt");
+    static AccountManager accountManager = new AccountManager();
+    static DataManager<Computer> dataManagerCom = new DataManager();
+    static List<Computer> computerList = dataManagerCom.readFile("computerList.txt");
     public static ComputerManager computerManager = new ComputerManager(computerList, "admin");
     static ComputerManagerView computerManagerView = new ComputerManagerView();
 
     public static void main(String[] args) {
-//        login();
+        login();
         System.out.println("Next Step!!!");
 
         Scanner input = new Scanner(System.in);
@@ -70,7 +77,7 @@ public class ClientManager {
                     computerManagerView.payMoneys(computerManager);
                     break;
                 case 8:
-
+                    AccountView.showMenuAccount(accountManager);
                     break;
                 case 9:
                     computerManagerView.showTotalMoney(computerManager);
@@ -83,10 +90,9 @@ public class ClientManager {
         }
     }
 
-
     static void login() {
         Scanner scan1 = new Scanner(System.in);
-        System.out.println("---WELCOME TO MIXI GAMMING---");
+        System.out.println("---WELCOME TO TOKYO NIGHT GAMMING---");
         System.out.println("User Name: ");
         String username = scan1.nextLine();
 

@@ -3,12 +3,13 @@ package controller;
 import model.Account;
 import storage.DataManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountManager {
     private DataManager<Account> dataManager = new DataManager<>();
     private String name;
-    private static List<Account> accountList;
+    private List<Account> accountList= new ArrayList<>();
 
     public AccountManager() {
     }
@@ -26,12 +27,12 @@ public class AccountManager {
         this.name = name;
     }
 
-    public static List<Account> getAccountList() {
+    public List<Account> getAccountList() {
         return accountList;
     }
 
-    public static void setAccountList(List<Account> accountList) {
-        AccountManager.accountList = accountList;
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
     public void addNewAccount(Account account) {
@@ -63,4 +64,5 @@ public class AccountManager {
         accountList.remove(account);
         dataManager.writeFile(accountList, "accountList.txt");
     }
-}
+
+   }

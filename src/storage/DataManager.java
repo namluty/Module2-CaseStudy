@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager<E> {
-    public void writeFile(List<E> computerList, String fileName){
+    public void writeFile(List<E> dataList, String fileName){
         File file = new File(fileName);
         if(!file.exists()){
             try {
@@ -20,7 +20,7 @@ public class DataManager<E> {
         try {
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(computerList);
+            oos.writeObject(dataList);
             oos.close();
             fos.close();
         } catch (IOException e) {

@@ -12,9 +12,9 @@ public class ComputerManagerView {
         Computer newComputer = ComputerView.createNewComputer();
         boolean checkAdd = computerManager.addComputer(newComputer);
         if (checkAdd) {
-            System.out.println("Add DONE");
+            System.out.println("WELL DONE");
         }else{
-            System.out.println("Da ton tai");
+            System.out.println("Account already exists! - Tài khoản đã tồn tại");
         }
     }
 
