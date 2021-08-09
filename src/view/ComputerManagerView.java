@@ -14,7 +14,7 @@ public class ComputerManagerView {
         if (checkAdd) {
             System.out.println("WELL DONE");
         }else{
-            System.out.println("Account already exists! - Tài khoản đã tồn tại");
+            System.out.println("Computer already exists! - Computer đã tồn tại");
         }
     }
 
