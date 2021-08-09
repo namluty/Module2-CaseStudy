@@ -58,7 +58,7 @@ public class ComputerManager {
 
     public void editComputer(int index, Computer computer) {
         computerList.remove(index);
-//        computerList.add(computer);
+        computerList.add(computer);
         dataManager.writeFile(computerList, "computerList.txt");
     }
 
